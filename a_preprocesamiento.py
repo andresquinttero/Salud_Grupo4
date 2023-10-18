@@ -1,43 +1,90 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-# Step 1: Load the RETO_df_cronicos database using pandas
-RETO_df_cronicos = pd.read_excel('databases/RETO_df_cronicos.xlsx')
 
-# Step 2: Check for missing values and handle them appropriately
-# Check for missing values
-missing_values = RETO_df_cronicos.isnull().sum()
+################# 1. Cargar el archivo Excel #################
+
+# Se carga el archivo Excel
+df_cronicos = pd.read_excel('databases/RETO_df_cronicos.xlsx', engine='openpyxl')
+
+# Obtener las primeras cinco filas del DataFrame para revisión
+preview_cronicos = df_cronicos.head(5)
+print(preview_cronicos)
+
+# Obtener los nombres de las columnas y sus tipos de datos del DataFrame
+columns_info = df_cronicos.dtypes
+print(columns_info)
+
+
+################# Función para corregir estos errores en las tildes #################
+
+def correct_encoding(column):
+    column = column.replace('Ã³', 'ó')
+    column = column.replace('Ã\xad', 'í')
+    column = column.replace('Ã©', 'é')
+    column = column.replace('Ã¡', 'á')
+    column = column.replace('Ãº', 'ú')
+    column = column.replace('Ã±', 'ñ')
+    column = column.replace('Ã', 'í')
+    return column
+
+# Aplica la función a cada columna del DataFrame
+df_cronicos.columns = [correct_encoding(col) for col in df_cronicos.columns]
+
+print(df_cronicos.columns) # Vemos que ya no hay errores de codificación
+
+# Estadísticas descriptivas de la base de datos
+print(df_cronicos.describe(include='all').T)
+
+# Ver el número de columnas
+print(len(df_cronicos.columns)) # 290 columnas
+
+################# Análisis de valores nulos #################
+
+missing_values = df_cronicos.isnull().sum()
 print(missing_values)
+total_nulls = df_cronicos.isnull().sum().sum()
+print(total_nulls)
+
+# Vemos el porcentaje de valores nulos por columna
+percentage_missing = (df_cronicos.isnull().sum() / len(df_cronicos)) * 100
+print(percentage_missing.sort_values(ascending=False))
+
+# Por lo que crearemos un mapa de calor para ver los valores nulos por columna
+plt.figure(figsize=(15, 10))
+sns.heatmap(df_cronicos.isnull(), cbar=False, cmap='viridis')
+plt.show()
+
+
+
+
+
 
 # Handle missing values
-RETO_df_cronicos = RETO_df_cronicos.dropna()
+df_cronicos = df_cronicos.dropna()
 
 # Step 3: Check for duplicates and handle them appropriately
 # Check for duplicates
-duplicates = RETO_df_cronicos.duplicated()
+duplicates = df_cronicos.duplicated()
 print(duplicates)
 
 # Handle duplicates
-RETO_df_cronicos = RETO_df_cronicos.drop_duplicates()
+df_cronicos = df_cronicos.drop_duplicates()
 
 # Step 4: Check for outliers and handle them appropriately
 # Check for outliers
-outliers = RETO_df_cronicos[RETO_df_cronicos.apply(lambda x: np.abs(x - x.mean()) / x.std() < 3).all(axis=1)]
+outliers = df_cronicos[df_cronicos.apply(lambda x: np.abs(x - x.mean()) / x.std() < 3).all(axis=1)]
 
 # Handle outliers
-RETO_df_cronicos = outliers
+df_cronicos = outliers
 
 # Step 5: Check for inconsistent data types and handle them appropriately
 # Check data types
-data_types = RETO_df_cronicos.dtypes
+data_types = df_cronicos.dtypes
 print(data_types)
 
 # Handle inconsistent data types
-RETO_df_cronicos['column_name'] = RETO_df_cronicos['column_name'].astype('int')
-
-# Step 6: Perform any necessary data transformations (e.g. scaling, normalization, encoding)
-# Perform data transformations
-# ...
-
 # Step 7: Save the pre-processed data to a new file
-RETO_df_cronicos.to_csv('preprocessed_data.csv', index=False)
+df_cronicos.to_csv('preprocessed_data.csv', index=False)
