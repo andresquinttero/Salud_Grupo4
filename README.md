@@ -10,7 +10,8 @@ Identificación temprana y gestión de pacientes con riesgo de EPOC, permitiendo
 
 1. Realizar una Predicción de Riesgo de EPOC: Utilizando técnicas analíticas para predecir el riesgo de desarrollar EPOC en pacientes, considerando factores como historial médico y exposición a factores de riesgo.
 
-2. Análisis de Variables Influyentes en el Desarrollo de EPOC: Identificando y analizando las variables generales que tienen un impacto significativo en el desarrollo de la EPOC, como el tabaquismo, uso de la acnea, nivel de saturación, examen de espirometría, número de exacerbaciones último año, es oxigene dependiente, las condiciones genéticas, entre otras.
+ 2. Análisis de Variables Influyentes en el Desarrollo de EPOC: Identificando y analizando las variables generales que tienen un impacto significativo en el desarrollo de la EPOC, como 
+ el tabaquismo, uso de la acnea, nivel de saturación, examen de espirometría, número de exacerbaciones último año, es oxigene dependiente, las condiciones genéticas, entre otras.
 
 3. Análisis de Variables Relevantes para la Prevención: Analizar variables específicas en pacientes identificados con riesgo de desarrollar EPOC para entender mejor las causas subyacentes y diseñar estrategias de prevención o de control personalizadas.
 
