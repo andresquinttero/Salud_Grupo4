@@ -1,5 +1,5 @@
 # Salud_Grupo4
-# **Diseño de Solución hacer análisis y prevención de la Enfermedad Pulmonar Obstructiva Crónica (EPOC)**
+# **Diseño de Solución análisis y prevención de la Enfermedad Pulmonar Obstructiva Crónica (EPOC)**
 
 ## **Objetivo General**
 
