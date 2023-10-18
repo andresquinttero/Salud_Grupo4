@@ -3,7 +3,7 @@
 
 ## **Objetivo General**
 
-Identificación temprana y gestión de pacientes con riesgo de EPOC, permitiendo una atención médica más precisa y personalizada.
+Identificación temprana y gestión de pacientes con riesgo de EPOC, permitiendo una atención médica precisa y personalizada.
 
 ## **Problema analítico**
 
