@@ -109,7 +109,7 @@ for col in numeric_cols:
     plt.title(f"Boxplot para {col}")
     plt.show()
 
-# Vemos que en la Box de peso hay 2 valores atipicos, por lo que se procede a correjirlos
+# Vemos que en la Box de peso hay 2 valores atipicos, por lo que se procede a corregirlos
 # Ordenamos los valores de la columna "Peso" en orden descendente y visualizar los primeros registros
 largest_weights = df_cronicos_cleaned["Peso"].nlargest(5)
 print(largest_weights)
@@ -129,3 +129,103 @@ df_cronicos_cleaned["Peso"].replace(replacement_values, inplace=True)
 largest_weights = df_cronicos_cleaned["Peso"].nlargest(5)
 print(largest_weights)
 # Vemos que ya no hay valores atipicos
+
+
+# Exploración inicial con el dataset limpio
+
+# Para ver todas las columnas
+pd.set_option('display.max_columns', None)
+print(df_cronicos_cleaned.columns.tolist())
+
+# Para ver todas las columnas con 2 valores únicos
+binary_cols = [col for col in df_cronicos_cleaned.columns if df_cronicos_cleaned[col].nunique() == 2]
+
+# Para ver los valores únicos de cada columna con 2 valores únicos
+for col in binary_cols:
+    print(f"Unique values in {col}: {df_cronicos_cleaned[col].unique()}")
+
+# # Cambiamos "no" con  "No" en algunas columnas
+df_cronicos_cleaned["Oxígeno dependiente"].replace("no", "No", inplace=True)
+df_cronicos_cleaned['Oxígeno dependiente']
+df_cronicos_cleaned["Tiene gases arteriales"].replace("no", "No", inplace=True)
+df_cronicos_cleaned['Tiene gases arteriales']
+
+# Cambiamos "no" con  "No" en "Diagnóstico EPOC" 
+df_cronicos_cleaned["Diagnóstico EPOC"].replace("no", "No", inplace=True)
+df_cronicos_cleaned['Diagnóstico EPOC']
+print(df_cronicos_cleaned['Diagnóstico EPOC'].value_counts())
+
+# Hacemos la variable 'Diagnóstico EPOC' numérica para luego hacer una matriz de correlación
+df_cronicos_cleaned["Diagnóstico EPOC"].replace("No", 0, inplace=True)
+df_cronicos_cleaned["Diagnóstico EPOC"].replace("Si", 1, inplace=True)
+df_cronicos_cleaned['Diagnóstico EPOC']
+df_cronicos_cleaned['Diagnóstico EPOC'] = df_cronicos_cleaned['Diagnóstico EPOC'].astype(int)
+
+
+# Vemos que hay algunos valores atípicos en la columna talla, vamos a borrarlos
+df_cronicos_cleaned = df_cronicos_cleaned[df_cronicos_cleaned['Talla'] < 200]
+
+# Vemos gráficamente cómo está el dataset
+
+# Gráfica para ver en qué mes es más frecuente el diagnóstico de EPOC
+plt.subplots(figsize=(12, 8))
+sns.countplot(x='MES', data=df_cronicos_cleaned)
+plt.title('Frecuencia de diagnóstico de EPOC por mes')
+plt.show()
+
+# Gráfica para ver si el peso tiene relación con la frecuencia de diagnóstico de EPOC
+sns.boxplot(x='Diagnóstico EPOC', y='Peso', data=df_cronicos_cleaned)
+plt.title('Relación entre peso y diagnóstico de EPOC')
+plt.show()
+# No hay ninguna relación aparente entre el diagnóstico de EPOC y el peso
+
+
+
+# Gráfica para ver si la talla tiene relación con la frecuencia de diagnóstico de EPOC
+sns.boxplot(x='Diagnóstico EPOC', y='Talla', data=df_cronicos_cleaned)
+plt.title('Relación entre talla y diagnóstico de EPOC')
+plt.show()
+# No hay ninguna relación aparente entre el diagnóstico de EPOC y la talla
+
+
+# Hacemos una matriz de correlación para ver las variables que más se relacionan con el diagnóstico de EPOC
+numeric_cols = df_cronicos_cleaned.select_dtypes(include=[np.number]).columns
+corr_matrix = df_cronicos_cleaned[numeric_cols].corr()
+plt.figure(figsize=(15, 10))
+sns.heatmap(corr_matrix, cmap='viridis')
+plt.show()
+print(corr_matrix["Diagnóstico EPOC"].sort_values(ascending=False))
+
+# Aunque las correlaciones no son muy altas, vemos que las variables que más 
+# se relacionan con el diagnóstico de EPOC son:
+# CAT, Clasificación GOLD, Disnea MMRC, Clasificación BODEX, VEF1/VFC posbroncodilatador
+
+# Lo cual tiene sentido, 
+
+# La variable que tiene la mayor correlación con el diagnóstico de EPOC es
+# el CAT, que es un cuestionario que evalúa el impacto de la EPOC en la calidad de vida del paciente.
+# Esto significa que a mayor puntuación en el CAT, mayor es la probabilidad de tener EPOC. 
+
+# La segunda variable con mayor correlación es la clasificación GOLD, que estratifica a los pacientes
+# con EPOC según el riesgo de exacerbaciones y el impacto en la calidad de vida. Esto significa 
+# que a mayor categoría en la clasificación GOLD, mayor es la probabilidad de tener EPOC
+
+# La tercera variable con mayor correlación es la disnea MMRC, que es una escala que mide el grado de
+# dificultad para respirar que experimenta el paciente. Esto significa que a mayor nivel de disnea,
+# mayor es la probabilidad de tener EPOC. Esto se explica por el hecho de que la disnea es uno de 
+# los síntomas más frecuentes y limitantes de la EPOC.
+
+# La cuarta variable con mayor correlación es la clasificación BODEX, que predice la mortalidad 
+# en los pacientes con EPOC. Esto significa que a mayor puntuación en el BODEX, mayor es la 
+# probabilidad de tener EPOC. Esto se debe a que el BODEX se basa en cuatro variables que reflejan
+# el estado nutricional, la función pulmonar, la capacidad de ejercicio y la severidad de los 
+# síntomas del paciente con EPOC.
+
+# La quinta variable con mayor correlación es el VEF1/VFC posbroncodilatador, que es el cociente 
+# entre el volumen espiratorio forzado en el primer segundo y la capacidad vital forzada 
+# después de administrar un broncodilatador.
+
+# Las variables que tienen una correlación muy baja o nula con el diagnóstico de EPOC son 
+# la velocidad (m/s) y el tiempo en segundos (apoyo monopodal). 
+# Estas variables miden aspectos relacionados con el equilibrio y la movilidad del paciente,
+# que no parecen estar directamente asociados con la presencia o ausencia de EPOC.
