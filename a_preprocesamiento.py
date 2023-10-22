@@ -57,6 +57,21 @@ plt.figure(figsize=(15, 10))
 sns.heatmap(df_cronicos.isnull(), cbar=False, cmap='viridis')
 plt.show()
 
+# Identificar las columnas de diagnóstico
+diagnostic_columns = [col for col in df_cronicos.columns if "Diagnostico" in col or "NombreDiagnostico" in col]
+
+# Crear una copia del DataFrame original para guardar los cambios
+df_cronicos_cleaned = df_cronicos.copy()
+
+# Reemplazar valores nulos por '0' en las columnas de diagnóstico y dejar los otros valores nulos como están
+for col in diagnostic_columns:
+    df_cronicos_cleaned[col] = df_cronicos_cleaned[col].apply(lambda x: 0 if pd.isnull(x) else x)
+
+# Verificar los cambios realizados en el mapa de calor
+plt.figure(figsize=(15, 10))
+sns.heatmap(df_cronicos_cleaned.isnull(), cbar=False, cmap='viridis')
+plt.show()
+# Aqui vemos que donde había valores nulos ahora hay ceros y donde si habian diagnositcos se dejaron como estaban
 
 
 
