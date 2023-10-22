@@ -18,10 +18,3 @@ Identificación temprana y gestión de pacientes con riesgo de EPOC, permitiendo
 ### **Diseño de solucion**
 
 ![salud](https://github.com/andresquinttero/Salud_Grupo4/assets/100113128/42ccca44-6630-4d81-9b16-e0cff9a3f517)
-
-<<<<<<< HEAD
-Aplicaciones de la analítica módulo 3
-Prueba
-=======
-Aplicaciones de la analítica módulo 3
->>>>>>> f654cfc (Funcion para corrgir tildes)
