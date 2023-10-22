@@ -2,7 +2,9 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+from scipy.stats import zscore
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 ################# 1. Cargar el archivo Excel #################
 
@@ -74,32 +76,56 @@ plt.show()
 # Aqui vemos que donde había valores nulos ahora hay ceros y donde si habian diagnositcos se dejaron como estaban
 
 
+# Adicionalemnte hay 15 columans que tienen valores nulos, por lo que se procede a llenarlos con valores por defecto segun cada una 
+
+# Definir las columnas y los valores correspondientes para llenar
+columns_to_fill = [
+    "Espirometria", "VEF1/CVF", "VEF1/VFC Posbroncodilatador", "Gravedad", "Diagnóstico EPOC",
+    "Disnea MMRC", "Clasificación", "CAT", "Número de exacerbaciones último año (Que hayan necesitado hospitalizado)",
+    "Clasificación GOLD", "Clasificación1", "Clasificación BODEX", "Oxígeno dependiente", "Tiene gases arteriales", "Resultado"
+]
+
+fill_values = ["no", 0, 0, "no", "no", 0, "no", 0, 0, 0, "no", 0, "no", "no", 0]
+
+# Llenar las columnas vacías según las instrucciones
+for col, value in zip(columns_to_fill, fill_values):
+    df_cronicos_cleaned[col].fillna(value, inplace=True)
+
+# Verificar los cambios en las primeras filas y en el mapa de calor
+df_cronicos_cleaned[columns_to_fill].head()
+plt.figure(figsize=(15, 10))
+sns.heatmap(df_cronicos_cleaned.isnull(), cbar=False, cmap='viridis')
+plt.show()
 
 
+################# Manejar atipicos #################
+# Seleccionar las primeras 5 columnas numéricas
+numeric_cols = df_cronicos_cleaned.select_dtypes(include=[np.number]).columns[:5]
 
-# Handle missing values
-df_cronicos = df_cronicos.dropna()
+# Crear boxplots para cada una de las columnas numéricas seleccionadas
+for col in numeric_cols:
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(x=df_cronicos_cleaned[col])
+    plt.title(f"Boxplot para {col}")
+    plt.show()
 
-# Step 3: Check for duplicates and handle them appropriately
-# Check for duplicates
-duplicates = df_cronicos.duplicated()
-print(duplicates)
+# Vemos que en la Box de peso hay 2 valores atipicos, por lo que se procede a correjirlos
+# Ordenamos los valores de la columna "Peso" en orden descendente y visualizar los primeros registros
+largest_weights = df_cronicos_cleaned["Peso"].nlargest(5)
+print(largest_weights)
 
-# Handle duplicates
-df_cronicos = df_cronicos.drop_duplicates()
+# Hay 4 valores sin sentido por lo que los aproximamos pensando que tienen error en la coma
+# Definir un diccionario con los valores actuales como claves y los nuevos valores como valores
+replacement_values = {
+    62153.0: 62,
+    6151.0: 61,
+    693.0: 69,
+    666.0: 67
+}
 
-# Step 4: Check for outliers and handle them appropriately
-# Check for outliers
-outliers = df_cronicos[df_cronicos.apply(lambda x: np.abs(x - x.mean()) / x.std() < 3).all(axis=1)]
+# Reemplazar los valores en la columna "Peso" usando el diccionario
+df_cronicos_cleaned["Peso"].replace(replacement_values, inplace=True)
 
-# Handle outliers
-df_cronicos = outliers
-
-# Step 5: Check for inconsistent data types and handle them appropriately
-# Check data types
-data_types = df_cronicos.dtypes
-print(data_types)
-
-# Handle inconsistent data types
-# Step 7: Save the pre-processed data to a new file
-df_cronicos.to_csv('preprocessed_data.csv', index=False)
+largest_weights = df_cronicos_cleaned["Peso"].nlargest(5)
+print(largest_weights)
+# Vemos que ya no hay valores atipicos
