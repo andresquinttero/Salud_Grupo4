@@ -1,5 +1,5 @@
 # Salud_Grupo4
-# **Diseño de Solución análisis y prevención de la Enfermedad Pulmonar Obstructiva Crónica (EPOC)**
+# **Diseño de Solución Análisis y Prevención de la Enfermedad Pulmonar Obstructiva Crónica (EPOC)**
 
 ## **Objetivo General**
 
@@ -17,7 +17,7 @@ Identificación temprana y gestión de pacientes con riesgo de EPOC, permitiendo
 
 ### **Diseño de solucion**
 
-![def](https://github.com/andresquinttero/Salud_Grupo4/assets/100113128/713e9d49-9285-46f9-8c95-654cae834326)
+![salud](https://github.com/andresquinttero/Salud_Grupo4/assets/100113128/42ccca44-6630-4d81-9b16-e0cff9a3f517)
 
 <<<<<<< HEAD
 Aplicaciones de la analítica módulo 3
