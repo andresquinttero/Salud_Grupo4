@@ -76,7 +76,7 @@ plt.show()
 # Aqui vemos que donde había valores nulos ahora hay ceros y donde si habian diagnositcos se dejaron como estaban
 
 
-# Adicionalemnte hay 15 columans que tienen valores nulos, por lo que se procede a llenarlos con valores por defecto segun cada una 
+# Adicionalemnte hay 15 columnas que tienen valores nulos, por lo que se procede a llenarlos con valores por defecto segun cada una 
 
 # Definir las columnas y los valores correspondientes para llenar
 columns_to_fill = [
