@@ -1,19 +1,16 @@
 # Salud_Grupo4
-# **Diseño de Solución Análisis y Prevención de la Enfermedad Pulmonar Obstructiva Crónica (EPOC)**
+# **Diseño y asignación de recursos basandose en la clasificación funcional de los pacientes, la edad predominante y sus necesidades específicas de atención médica**
 
 ## **Objetivo General**
 
-Identificación temprana y gestión de pacientes con riesgo de EPOC, permitiendo una atención médica precisa y personalizada.
+Creacion de un sistema que pronostique el uso de recursos hospitalarios, considerando múltiples variables como son: la clasificación funcional de los pacientes, la edad predominante y sus necesidades específicas de atención médica
 
 ## **Problema analítico**
 
 
-1. Realizar una Predicción de Riesgo de EPOC: Utilizando técnicas analíticas para predecir el riesgo de desarrollar EPOC en pacientes, considerando factores como historial médico y exposición a factores de riesgo.
-
- 2. Análisis de Variables Influyentes en el Desarrollo de EPOC: Identificando y analizando las variables generales que tienen un impacto significativo en el desarrollo de la EPOC, como 
- el tabaquismo, uso de la acnea, nivel de saturación, examen de espirometría, número de exacerbaciones último año, es oxigene dependiente, las condiciones genéticas, entre otras.
-
-3. Análisis de Variables Relevantes para la Prevención: Analizar variables específicas en pacientes identificados con riesgo de desarrollar EPOC para entender mejor las causas subyacentes y diseñar estrategias de prevención o de control personalizadas.
+1. Realizar una predicción precisa del uso mensual de recursos hospitalización  para cada clase funcional de pacientes bajo la modalidad de PGP.
+2. Desarrollar estrategias para optimizar la asignación de recursos, considerando la clasificación funcional de los pacientes, la edad con mayor frecuencia y sus necesidades específicas de atención médica
+3. Implementar métricas de evaluación para medir la efectividad del sistema predictivo y la asignación de recursos, como la precisión de las predicciones y la utilización eficiente de los recursos hospitalarios.
 
 ### **Diseño de solucion**
 
