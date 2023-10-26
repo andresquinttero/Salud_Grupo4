@@ -14,4 +14,5 @@ Creacion de un sistema que pronostique el uso de recursos hospitalarios, conside
 
 ### **Diseño de solucion**
 
-![deew](https://github.com/andresquinttero/Salud_Grupo4/assets/100113128/246562f2-46c1-4a18-bfa0-c9650468677b)
+![deew](https://github.com/andresquinttero/Salud_Grupo4/assets/100113128/4c361fd9-86aa-4c27-8f87-5c0badc14619)
+
