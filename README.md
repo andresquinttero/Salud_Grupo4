@@ -14,6 +14,6 @@ Creacion de un sistema que pronostique el uso de recursos hospitalarios y de cir
 
 ### **Diseño de solucion**
 
-![sxd](https://github.com/andresquinttero/Salud_Grupo4/assets/100113128/797be399-0621-4e9f-98b3-c4f588d6e87e)
+![vfb](https://github.com/andresquinttero/Salud_Grupo4/assets/100113128/4e6e2f66-5911-4397-b541-e64dc8afae91)
 
 
