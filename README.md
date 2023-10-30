@@ -8,9 +8,10 @@ Creacion de un sistema que pronostique el uso de recursos hospitalarios y de cir
 ## **Problema analítico**
 
 
-1. Realizar una predicción precisa del uso mensual de recursos hospitalización y operación,  para cada clase funcional de pacientes bajo la modalidad de PGP.
-2. Desarrollar estrategias para optimizar la asignación de recursos, considerando la clasificación funcional de los pacientes, la edad con mayor frecuencia y sus necesidades específicas de atención médica
-3. Implementar métricas de evaluación para medir la efectividad del sistema predictivo y la asignación de recursos, como la precisión de las predicciones y la utilización eficiente de los recursos hospitalarios y de cirugía.
+1.	Realizar una predicción precisa del uso de los recursos hospitalización, de acuerdo al tiempo de estancia para cada clase funcional de pacientes bajo la modalidad de PGP.
+2.	Desarrollar estrategias para optimizar la asignación de recursos, considerando la clasificación funcional de los pacientes, la edad con mayor frecuencia y sus necesidades específicas de atención médica.
+3.	Implementar métricas de evaluación para medir la efectividad del sistema predictivo y la asignación de recursos, como la precisión de las predicciones y la utilización eficiente de los recursos hospitalarios.
+
 
 ### **Diseño de solucion**
 
